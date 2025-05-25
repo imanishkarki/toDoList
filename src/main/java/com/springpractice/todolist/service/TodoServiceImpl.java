@@ -22,6 +22,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public ApiResponse saveTodoItemDTO(ToDoItemDTO todoItemDto) {
 
+
         Optional<ToDoItem> existingItem = todoRepository.findByTitle(todoItemDto.getTitle());
 
 
@@ -37,8 +38,8 @@ public class TodoServiceImpl implements TodoService {
             ToDoItemDTO tdto = new ToDoItemDTO(toDoItem.getId(), toDoItem.getTitle(), toDoItem.getAuthor(), toDoItem.getDescription());
             return new ApiResponse(tdto, true, "saved");
         } else {
-String errorMessage = String.format("this cant be posted",todoItemDto.getTitle(),todoItemDto.getDescription());
-        throw new DuplicateContentException("title already exists"+todoItemDto.getTitle()+"gfdgdg");
+
+        throw new DuplicateContentException("title already exists"+todoItemDto.getTitle()+" fsdfsd");
         }
     }
 

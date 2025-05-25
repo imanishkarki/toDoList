@@ -1,17 +1,13 @@
 package com.springpractice.todolist.GlobalExceptionHandler;
-
-import com.springpractice.todolist.entity.ToDoItem;
 import com.springpractice.todolist.model.ApiResponse;
-import com.springpractice.todolist.payload.ToDoItemDTO;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponse;
+import com.springpractice.todolist.ErrorResponse.ErrorResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,9 +33,9 @@ public class GlobalExpHandler {
   
 @ExceptionHandler(DuplicateContentException.class)
   public ResponseEntity<ErrorResponse> duplicateContentExceptionHandler(DuplicateContentException dpex, WebRequest webreq){
-
+    ErrorResponse erp = new ErrorResponse(dpex.getMessage(),webreq.getDescription(false),"Dupliucate Title");
+    return new ResponseEntity<ErrorResponse>(erp, HttpStatus.CONFLICT);
   }
-
 }
 
 
